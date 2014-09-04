@@ -59,7 +59,7 @@ endif
 CPU ?= ct11mp
 
 # look up KDIR based om CPU selection
-KDIR ?= $(KDIR-$(CPU))
+KDIR=KDIR-ct11mp
 ifeq ($(KDIR),)
 $(error No KDIR found for platform $(CPU))
 endif
