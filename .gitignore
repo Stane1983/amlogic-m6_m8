@@ -100,3 +100,14 @@ x509.genkey
 
 # customer folder
 customer
+
+# Amlogic related
+arch/arm/boot/meson.dtd
+drivers/amlogic/ump/__mali_osk_atomics.c
+drivers/amlogic/ump/__mali_osk_locks.c
+drivers/amlogic/ump/__mali_osk_math.c
+drivers/amlogic/ump/__mali_osk_memory.c
+drivers/amlogic/ump/__mali_osk_misc.c
+boot.img
+deploy
+
