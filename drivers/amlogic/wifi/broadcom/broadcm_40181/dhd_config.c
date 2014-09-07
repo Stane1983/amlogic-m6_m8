@@ -95,6 +95,11 @@ const static char *bcm43341b0ag_fw_name[] = {
 	"fw_bcm43341b0_ag_mfg.bin"
 };
 
+const static char *nv_name[] = {
+	"ap6210_nvram.txt",
+	"ap6330_nvram.txt",
+};
+
 const static char *bcm43241b4ag_fw_name[] = {
 	"fw_bcm43241b4_ag.bin",
 	"fw_bcm43241b4_ag_apsta.bin",
@@ -319,6 +324,40 @@ dhd_conf_set_nv_name_by_mac(dhd_pub_t *dhd, bcmsdh_info_t *sdh, char *nv_path)
 				}
 			}
 		}
+	}
+}
+
+void
+dhd_conf_set_nv_name_by_chip(dhd_pub_t *dhd, char *dst, char *src)
+{
+	int fw_type, ag_type;
+	static uint chip, chiprev, first=1;
+	int i;
+
+	if (first) {
+		chip = dhd_bus_chip_id(dhd);
+		chiprev = dhd_bus_chiprev_id(dhd);
+		first = 0;
+	}
+		strcpy(dst, src);
+	#ifndef FW_PATH_AUTO_SELECT
+		return;
+	#endif
+
+	/* find out the last '/' */
+	i = strlen(dst);
+	while (i>0){
+		if (dst[i] == '/') break;
+		i--;
+	}
+	switch (chip) {
+		case BCM4330_CHIP_ID:
+					strcpy(&dst[i+1], nv_name[1]);
+						break;
+		case BCM43362_CHIP_ID:
+					strcpy(&dst[i+1], nv_name[0]);
+						break;	
+		
 	}
 }
 
